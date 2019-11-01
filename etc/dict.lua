@@ -13,22 +13,24 @@ local table = require("table")
 local socket = require("socket")
 local url = require("socket.url")
 local tp = require("socket.tp")
-module("socket.dict")
+socket.dict = {}
+local _M = socket.dict
+-- module("socket.dict")
 
 -----------------------------------------------------------------------------
 -- Globals
 -----------------------------------------------------------------------------
-HOST = "dict.org"
-PORT = 2628
-TIMEOUT = 10
+_M.HOST = "dict.org"
+_M.PORT = 2628
+_M.TIMEOUT = 10
 
 -----------------------------------------------------------------------------
 -- Low-level dict API
 -----------------------------------------------------------------------------
 local metat = { __index = {} }
 
-function open(host, port)
-    local tp = socket.try(tp.connect(host or HOST, port or PORT, TIMEOUT))
+function _M.open(host, port)
+    local tp = socket.try(tp.connect(host or _M.HOST, port or _M.PORT, _M.TIMEOUT))
     return base.setmetatable({tp = tp}, metat)
 end
 
@@ -123,7 +125,7 @@ local function parse(u)
 end
 
 local function tget(gett)
-    local con = open(gett.host, gett.port)
+    local con = _M.open(gett.host, gett.port)
     con:greet()
     if gett.command == "d" then
         local def = con:define(gett.database, gett.word)
@@ -144,8 +146,9 @@ local function sget(u)
     return tget(gett)
 end
 
-get = socket.protect(function(gett)
+_M.get = socket.protect(function(gett)
     if base.type(gett) == "string" then return sget(gett)
     else return tget(gett) end
 end)
 
+return _M

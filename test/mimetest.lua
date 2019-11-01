@@ -1,6 +1,6 @@
 local socket = require("socket")
-local ltn12 = require("ltn12")
-local mime = require("mime")
+local ltn12 = require("socket.ltn12")
+local mime = require("socket.mime")
 
 local unpack = unpack or table.unpack
 

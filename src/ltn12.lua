@@ -7,14 +7,17 @@
 -----------------------------------------------------------------------------
 -- Declare module
 -----------------------------------------------------------------------------
+local socket = require("socket")
 local string = require("string")
 local table = require("table")
 local unpack = unpack or table.unpack
 local base = _G
-local _M = {}
-if module then -- heuristic for exporting a global package table
-    ltn12 = _M
-end
+socket.ltn12 = {}
+local _M = socket.ltn12
+-- local _M = {}
+-- if module then -- heuristic for exporting a global package table
+--     ltn12 = _M
+-- end
 local filter,source,sink,pump = {},{},{},{}
 
 _M.filter = filter

@@ -1,7 +1,7 @@
 local socket = require("socket")
 local ftp = require("socket.ftp")
 local url = require("socket.url")
-local ltn12 = require("ltn12")
+local ltn12 = require("socket.ltn12")
 
 -- use dscl to create user "luasocket" with password "password"
 -- with home in /Users/diego/luasocket/test/ftp

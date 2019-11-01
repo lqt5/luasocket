@@ -1,4 +1,4 @@
-local mime = require("mime")
+local mime = require("socket.mime")
 
 function test_dot(original, right)
     local result, n = mime.dot(2, original)

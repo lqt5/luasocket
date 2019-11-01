@@ -8,10 +8,12 @@
 -- Declare module and import dependencies
 -----------------------------------------------------------------------------
 local base = _G
-local ltn12 = require("ltn12")
-local mime = require("mime.core")
+local socket = require("socket")
+local ltn12 = require("socket.ltn12")
+local mime = require("socket.mime.core")
 local string = require("string")
 local _M = mime
+socket.mime = _M
 
 -- encode, decode and wrap algorithm tables
 local encodet, decodet, wrapt = {},{},{}
